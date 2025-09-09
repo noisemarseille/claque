@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The band claque - Presskit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+        @keyframes neon { 0%, 100% { text-shadow: 0 0 5px #ff0080, 0 0 10px #ff0080, 0 0 15px #ff0080; } 50% { text-shadow: 0 0 2px #ff0080, 0 0 5px #ff0080, 0 0 8px #ff0080; } }
+        @keyframes chaos { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; line-height: 1.6; }
+        .hero { 
+            height: 100vh; 
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,0,128,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(128,0,255,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0,255,128,0.2) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), 
+                url('claque/Photo.jpg');
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(255,0,128,0.1) 2px,
+                rgba(255,0,128,0.1) 4px
+            );
+            pointer-events: none;
+        }
+        .hero h1 { 
+            font-family: 'Bebas Neue', sans-serif; 
+            font-size: clamp(6rem, 15vw, 20rem); 
+            font-weight: 900; 
+            color: #fff;
+            text-shadow: 
+                0 0 10px #ff0080,
+                0 0 20px #ff0080,
+                0 0 30px #ff0080,
+                3px 3px 0px #000,
+                -3px -3px 0px #8000ff;
+            margin-bottom: 1rem; 
+            animation: glitch 0.3s infinite;
+            transform: skew(-5deg);
+        }
+        
+        .hero .subtitle { 
+            font-size: 2rem; 
+            color: #00ff80; 
+            font-weight: 700;
+            text-shadow: 2px 2px 0px #000, 0 0 10px #00ff80;
+            animation: neon 2s ease-in-out infinite alternate;
+            transform: skew(3deg);
+        }
+        
+        .section { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 5rem 2rem; 
+        }
+        .section h2 { 
+            font-family: 'Bebas Neue', sans-serif; 
+            font-size: 3rem; 
+            color: #fff; 
+            margin-bottom: 2rem; 
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 1rem;
+        }
+        .bio-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .bio { 
+            font-size: 1.1rem; 
+            color: #ccc; 
+            line-height: 1.8;
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        .bio h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .members { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin: 3rem 0; 
+        }
+        .member { 
+            background: rgba(255,255,255,0.05); 
+            padding: 1.5rem; 
+            border-radius: 8px; 
+            min-width: 200px; 
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .member:hover {
+            transform: skew(-5deg) rotate(-2deg) scale(1.1);
+            animation: glitch 0.25s infinite;
+        }
+        .drums { 
+            background: rgba(255,255,255,0.05); 
+            padding: 1.5rem; 
+            border-radius: 8px; 
+            min-width: 200px; 
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .drums:hover {
+            transform: skew(-5deg) rotate(-2deg) scale(1.1);
+            animation: glitch 0.5s infinite;
+        }
+        .albums-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem; 
+            margin: 2rem 0; 
+        }
+        .album { 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 12px; 
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+        .album:hover { transform: translateY(-5px); }
+        .album img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+        }
+        .album-info { 
+            padding: 1.5rem; 
+        }
+        .album-title { 
+            font-size: 1.4rem; 
+            font-weight: 600; 
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .album-year { 
+            color: #888; 
+            font-size: 0.9rem; 
+            margin-bottom: 1rem;
+        }
+        .album-description { 
+            color: #ccc; 
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .photo-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1rem; 
+            margin: 2rem 0; 
+        }
+        .photo-grid img { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            transition: transform 0.3s;
+            filter: grayscale(20%);
+        }
+        .photo-grid img:hover { transform: scale(1.05); }
+        @keyframes jitter { 0% { transform: translate(0); } 25% { transform: translate(-1px, 1px); } 50% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, 1px); } }
+        .ceremony-item { 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        .ceremony-item:hover:not(.expanded) { 
+            background: rgba(255,255,255,0.05); 
+            animation: jitter 0.2s infinite;
+        }
+        .ceremony-item.expanded:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        .ceremony-header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid #333;
+        }
+        .ceremony-toggle {
+            color: #3b3b3b;
+            font-size: 1.0rem;
+            transition: transform 0.3s;
+        }
+        .ceremony-item.expanded .ceremony-toggle {
+            transform: rotate(180deg);
+        }
+        .ceremony-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(255,255,255,0.02);
+        }
+        .ceremony-item.expanded .ceremony-description {
+            max-height: 200px;
+        }
+        .ceremony-content {
+            padding: 1rem;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        @media (max-width: 600px) {
+            .ceremony-header { 
+                flex-direction: column; 
+                gap: 0.3rem;
+                text-align: center;
+            }
+            .ceremony-toggle {
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .contact-info { 
+            background: rgba(255,255,255,0.05); 
+            padding: 2rem; 
+            border-radius: 12px; 
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.2rem 1.0rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .social-link:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) { 
+            .section { padding: 2rem 1rem; } 
+            .hero h1 { font-size: clamp(3rem, 12vw, 6rem); }
+            .hero .subtitle { font-size: 1.2rem; }
+            .section h2 { font-size: 2rem; }
+            .bio-container { grid-template-columns: 1fr; gap: 1rem; }
+            .bio { font-size: 1rem; padding: 1rem; }
+            .members { gap: 1rem; }
+            .member { min-width: 150px; padding: 1rem; }
+            .album-title { font-size: 1.2rem; }
+            .photo-grid { 
+                grid-template-columns: 1fr; 
+                gap: 0.5rem;
+            }
+            .photo-grid img { height: 250px; }
+            .social-links { gap: 1rem; }
+            .social-link { padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .contact-info { padding: 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .section { padding: 1.5rem 0.5rem; }
+            .hero h1 { font-size: clamp(2.5rem, 15vw, 4rem); }
+            .hero .subtitle { font-size: 1rem; }
+            .section h2 { font-size: 1.5rem; }
+            .bio { font-size: 1rem; }
+            .member { padding: 0.8rem; font-size: 0.9rem; }
+            .album-title { font-size: 1.1rem; }
+            .contact-info { padding: 1rem; }
+        }
+    </style>
+</head>
+<link rel="icon" href="claque/logo32.png" type="image/png">
+
+<body>
+    <div class="hero">
+        <div>
+            <h1>CLAQUE</h1>
+            <div class="subtitle">Rock/Noise • Marseille</div>
+        </div>
+    </div>
+    
+    <div class="social-links">
+        <a href="https://claquemusic.bandcamp.com" class="social-link" target="_blank">Bandcamp</a>
+        <a href="https://www.facebook.com/p/CLAQUE-100063512141462/" class="social-link" target="_blank">Facebook</a>
+        <a href="https://instagram.com/claque.band" class="social-link" target="_blank">Instagram</a>
+        <a href="https://open.spotify.com/artist/6IUXyBZJe6bkG2DyIz9OXo" class="social-link" target="_blank">Spotify</a>
+        <a href="#" class="social-link" onclick="showImage(); return false;">Fiche Technique</a>
+        <div id="imagePopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; cursor: pointer;" onclick="this.style.display='none';">
+            <img src="claque/FT.png" style="max-width: 90%; max-height: 90%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            function showImage() {
+                document.getElementById('imagePopup').style.display = 'block';
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.getElementById('imagePopup').style.display = 'none';
+                }
+            });
+            function toggleCeremony(element) {
+                element.classList.toggle('expanded');
+            }
+        </script>
+
+    </div>
+
+    <div class="section">
+        <h2>Words</h2>
+        <div class="bio-container">
+            <div class="bio">
+                <!-- <h3>Français</h3> -->
+                CLAQUE est l'écho d'une frustration, l'incarnation sonore d'une violence intérieure. Ce trio de noise rock français frappe fort, très fort. Leurs architectures sonores tranchantes et une rythmique implacable créent une atmosphère à la fois chaotique et hypnotique. Leur premier EP, Xanax Paradise, sorti en 2025, a marqué les esprits avec ses morceaux à la fois rugueux et mélodiques. Sur scène, Claque se déchaîne. Le groupe délivre un set intense et sans fioriture, où l'impact de chaque morceau est viscéral. C'est un concert à l'énergie brute, un temple pour la libération.
+            </div>
+            <div class="bio">
+                <!-- <h3>English</h3> -->
+                CLAQUE emerges from Marseille's underground scene, crafting a wild blend of rock and noise that channels ancestral rage through modern chaos. This trio turns their hometown's gritty urban chaos into pure musical adrenaline. The drummer and bassist lock into ritualistic, fast-paced patterns creating an unrelenting rhythmic foundation that allows the guitarist-vocalist to become a sonic shaman. It's hypnotic, it's loud, its raw energy meets primal beats, like controlled chaos seeking freedom. Their 2025 debut Xanax Paradise hits hard with songs that are both beautifully destructive and addictive. Live, CLAQUE transforms any venue into a sweat-soaked ritual of liberation. No pretense, just visceral impact that demands you surrender to the chaos.
+            </div>
+        </div>
+        <div class="members">
+            <div class="member">Vince 🎤<br> Shaman of sound</div>
+            <div class="drums">Pierrot 𝄢<br> Earth shaker</div>
+            <div class="drums">Panos 🥁<br> Machine</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Album</h2>
+        <div class="album" style="max-width: 600px; margin: 0 auto;">
+            <img src="claque/albums/xanax paradise/album.jpg" alt="Xanax Paradise">
+            <div style="display: flex; gap: 1rem; padding: 1rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <div class="album-title">Xanax Paradise</div>
+                    <div class="album-year">2024</div>
+                    <div class="album-description">
+                        released February 14, 2025
+                        <br>
+                        <br>
+                        Produced, Recorded by CLAQUE<br>
+                        Mastered by Nicolas Dick<br>
+                        Mixed by Panagiotis Pansoplos<br>
+                        Artwork : Morgane Borel<br>
+                        All songs written by CLAQUE<br>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 200px; display: flex; justify-content: center; align-items: center;">
+                    <iframe style="border: 0; width: 100%; max-width: 300px; height: 200px;" src="https://bandcamp.com/EmbeddedPlayer/album=1334432334/size=large/bgcol=333333/linkcol=0f91ff/artwork=small/transparent=true/" seamless><a href="https://claquemusic.bandcamp.com/album/xanax-paradise">Xanax Paradise by CLAQUE</a></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Music</h2>
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/DySeav1flQE" frameborder="0" allowfullscreen style="border-radius: 8px; max-width: 100%; height: auto; aspect-ratio: 16/9;"></iframe>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid #333;">
+            <!-- <h3 style="color: #fff; margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">Ceremonies</h3> -->
+            <h2>Ceremonies</h2>
+            <div style="max-width: 600px; margin: 0 auto;">                
+                <div class="ceremony-item" onclick="toggleCeremony(this)">
+                    <div class="ceremony-header">
+                        <span>L'Embobineuse, Marseille</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #888;">2025</span>
+                            <span class="ceremony-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-description">
+                        <div class="ceremony-content">
+                            Release party !!! with friends.
+                        </div>
+                    </div>
+                </div>
+                <div class="ceremony-item" onclick="toggleCeremony(this)">
+                    <div class="ceremony-header">
+                        <span>Leda Atomica Musica, Marseille</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #888;">2025</span>
+                            <span class="ceremony-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-description">
+                        <div class="ceremony-content">
+                            "Electric performance for closing FestiLAM."
+                        </div>
+                    </div>
+                </div>
+                <div class="ceremony-item" onclick="toggleCeremony(this)">
+                    <div class="ceremony-header">
+                        <span>Montpellier | Paris | Lille | Nantes</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #888;">2025</span>
+                            <span class="ceremony-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-description">
+                        <div class="ceremony-content">
+                            Multi-city tour across France's underground circuit. A pilgrimage through the French noise scene.
+                        </div>
+                    </div>
+                </div>
+                <div class="ceremony-item" onclick="toggleCeremony(this)">
+                    <div class="ceremony-header">
+                        <span>FESTIVAL AIX-EN-PROVOCK, Aix-en-Provence</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #888;">2025</span>
+                            <span class="ceremony-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-description">
+                        <div class="ceremony-content">
+                            Festival celebrating the rebellious spirit of rock and alternative music.
+                        </div>
+                    </div>
+                </div>
+                <div class="ceremony-item" onclick="toggleCeremony(this)">
+                    <div class="ceremony-header">
+                        <span>Le Molotov, Marseille</span>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="color: #888;">2024</span>
+                            <span class="ceremony-toggle">▼</span>
+                        </div>
+                    </div>
+                    <div class="ceremony-description">
+                        <div class="ceremony-content">
+                            Legendary underground venue where CLAQUE unleashed their fury.
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Visions</h2>
+        <div class="photo-grid">
+            <img src="claque/pics/_DSC4098-Modifier-2-Modifier-3.jpg" alt="The band claque">
+            <img src="claque/pics/_DSC4104-Modifier-Modifier-2.jpg" alt="The band claque">
+            <img src="claque/pics/_DSC4127-Modifier-Modifier-2.jpg" alt="The band claque">
+            <img src="claque/pics/_DSC4142-Modifier-Modifier-2.jpg" alt="The band claque">
+            <img src="claque/pics/_DSC4145-Modifier-Modifier-2.jpg" alt="The band claque">
+            <img src="claque/pics/_DSC4159-Modifier-Modifier-2.jpg" alt="The band claque">
+        </div>
+        <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: #666;">Captured by @pascalp13</div>
+    </div>
+
+    <div class="section">
+        <h2>Contact</h2>
+        <div class="contact-info">
+            <p><strong>Booking chaos:</strong> earvinmacadam@gmail.com</p>            
+            <p><strong>Follow The Noise:</strong> @claque.band</p>
+        </div>
+    </div>
+</body>
+</html>
