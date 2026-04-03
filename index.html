@@ -440,7 +440,7 @@
                 const listContainer = document.getElementById('ceremony-list');
 
                 try {
-                    const response = await fetch('performances.json');
+                    const response = await fetch('claque/performances.json');
                     const performances = await response.json();
 
                     // Clear the container and build the items
