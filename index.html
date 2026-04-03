@@ -362,20 +362,39 @@
     <div class="section">
         <h2>Words</h2>
         <div class="bio-container">
-            <div class="bio">
-                <!-- <h3>Français</h3> -->
-                CLAQUE est l'écho d'une frustration, l'incarnation sonore d'une violence intérieure. Ce trio de noise rock français frappe fort, très fort. Leurs architectures sonores tranchantes et une rythmique implacable créent une atmosphère à la fois chaotique et hypnotique. Leur premier EP, Xanax Paradise, sorti en 2025, a marqué les esprits avec ses morceaux à la fois rugueux et mélodiques. Sur scène, Claque se déchaîne. Le groupe délivre un set intense et sans fioriture, où l'impact de chaque morceau est viscéral. C'est un concert à l'énergie brute, un temple pour la libération.
-            </div>
-            <div class="bio">
-                <!-- <h3>English</h3> -->
-                CLAQUE emerges from Marseille's underground scene, crafting a wild blend of rock and noise that channels ancestral rage through modern chaos. This trio turns their hometown's gritty urban chaos into pure musical adrenaline. The drummer and bassist lock into ritualistic, fast-paced patterns creating an unrelenting rhythmic foundation that allows the guitarist-vocalist to become a sonic shaman. It's hypnotic, it's loud, its raw energy meets primal beats, like controlled chaos seeking freedom. Their 2025 debut Xanax Paradise hits hard with songs that are both beautifully destructive and addictive. Live, CLAQUE transforms any venue into a sweat-soaked ritual of liberation. No pretense, just visceral impact that demands you surrender to the chaos.
-            </div>
+            <div class="bio" id="bio-fr">Loading biography...</div>
+            <div class="bio" id="bio-en">Loading biography...</div>
         </div>
+        
         <div class="members">
             <div class="member">Vince 🎤<br> Shaman of sound</div>
             <div class="drums">Pierrot 𝄢<br> Earth shaker</div>
             <div class="drums">Panos 🥁<br> Machine</div>
         </div>
+
+        <script>
+            (async function() {
+                const frContainer = document.getElementById('bio-fr');
+                const enContainer = document.getElementById('bio-en');
+
+                try {
+                    // Fetch the description file
+                    const response = await fetch('claque/description.json');
+                    if (!response.ok) throw new Error('Failed to load descriptions');
+                    
+                    const data = await response.json();
+
+                    // Inject the text into the containers
+                    frContainer.textContent = data.fr;
+                    enContainer.textContent = data.en;
+
+                } catch (err) {
+                    console.error("Error loading descriptions:", err);
+                    frContainer.textContent = "Erreur de chargement de la biographie.";
+                    enContainer.textContent = "Error loading biography.";
+                }
+            })();
+        </script>
     </div>
 
     <div class="section">
@@ -409,82 +428,57 @@
         <div style="text-align: center; margin-bottom: 3rem;">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/KuGgzexg6uw" frameborder="0" allowfullscreen style="border-radius: 8px; max-width: 100%; height: auto; aspect-ratio: 16/9;"></iframe>
         </div>
+
         <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border: 1px solid #333;">
-            <!-- <h3 style="color: #fff; margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">Ceremonies</h3> -->
             <h2>Ceremonies</h2>
-            <div style="max-width: 600px; margin: 0 auto;">                
-                <div class="ceremony-item" onclick="toggleCeremony(this)">
-                    <div class="ceremony-header">
-                        <span>L'Embobineuse, Marseille</span>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="color: #888;">2025</span>
-                            <span class="ceremony-toggle">▼</span>
-                        </div>
-                    </div>
-                    <div class="ceremony-description">
-                        <div class="ceremony-content">
-                            Release party !!! with friends.
-                        </div>
-                    </div>
+            <div id="ceremony-list" style="max-width: 600px; margin: 0 auto;">
                 </div>
-                <div class="ceremony-item" onclick="toggleCeremony(this)">
-                    <div class="ceremony-header">
-                        <span>Leda Atomica Musica, Marseille</span>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="color: #888;">2025</span>
-                            <span class="ceremony-toggle">▼</span>
-                        </div>
-                    </div>
-                    <div class="ceremony-description">
-                        <div class="ceremony-content">
-                            "Electric performance for closing FestiLAM."
-                        </div>
-                    </div>
-                </div>
-                <div class="ceremony-item" onclick="toggleCeremony(this)">
-                    <div class="ceremony-header">
-                        <span>Montpellier | Paris | Lille | Nantes</span>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="color: #888;">2025</span>
-                            <span class="ceremony-toggle">▼</span>
-                        </div>
-                    </div>
-                    <div class="ceremony-description">
-                        <div class="ceremony-content">
-                            Multi-city tour across France's underground circuit. A pilgrimage through the French noise scene.
-                        </div>
-                    </div>
-                </div>
-                <div class="ceremony-item" onclick="toggleCeremony(this)">
-                    <div class="ceremony-header">
-                        <span>FESTIVAL AIX-EN-PROVOCK, Aix-en-Provence</span>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="color: #888;">2025</span>
-                            <span class="ceremony-toggle">▼</span>
-                        </div>
-                    </div>
-                    <div class="ceremony-description">
-                        <div class="ceremony-content">
-                            Festival celebrating the rebellious spirit of rock and alternative music.
-                        </div>
-                    </div>
-                </div>
-                <div class="ceremony-item" onclick="toggleCeremony(this)">
-                    <div class="ceremony-header">
-                        <span>Le Molotov, Marseille</span>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="color: #888;">2024</span>
-                            <span class="ceremony-toggle">▼</span>
-                        </div>
-                    </div>
-                    <div class="ceremony-description">
-                        <div class="ceremony-content">
-                            Legendary underground venue where CLAQUE unleashed their fury.
-                        </div>
-                    </div>
-                </div>                
-            </div>
         </div>
+
+        <script>
+            (async function() {
+                const listContainer = document.getElementById('ceremony-list');
+
+                try {
+                    const response = await fetch('performances.json');
+                    const performances = await response.json();
+
+                    // Clear the container and build the items
+                    listContainer.innerHTML = ''; 
+
+                    performances.forEach(perf => {
+                        const item = document.createElement('div');
+                        item.className = 'ceremony-item';
+                        // We attach the click listener directly
+                        item.onclick = function() { toggleCeremony(this); };
+
+                        item.innerHTML = `
+                            <div class="ceremony-header">
+                                <span>${perf.venue}</span>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="color: #888;">${perf.year}</span>
+                                    <span class="ceremony-toggle">▼</span>
+                                </div>
+                            </div>
+                            <div class="ceremony-description">
+                                <div class="ceremony-content">
+                                    ${perf.description}
+                                </div>
+                            </div>
+                        `;
+                        listContainer.appendChild(item);
+                    });
+                } catch (err) {
+                    console.error("Error loading performances:", err);
+                    listContainer.innerHTML = '<p style="text-align:center; color:#666;">Tour dates coming soon.</p>';
+                }
+            })();
+
+            // Keep your existing toggle function
+            function toggleCeremony(element) {
+                element.classList.toggle('active');
+            }
+        </script>
     </div>
 
     <div class="section">
